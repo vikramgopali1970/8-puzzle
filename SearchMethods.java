@@ -15,10 +15,12 @@ public class SearchMethods {
         Node c_Node = q.peek();
         Node res = null;
         set.add(c_Node);
+        int enque = 0;
         int lvl = 0;
         int len = q.size();
         while (!(Arrays.equals(c_Node.puz,goal.puz)) && lvl<=DEPTH_LIMIT) {
             c_Node = q.poll();
+            enque++;
             len--;
             ArrayList<Node> children = c_Node.getChildrenNodes();
             for (Node child : children) {
@@ -38,9 +40,14 @@ public class SearchMethods {
                 lvl++;
             }
         }
-        res.printSolutionPath(res);
+        if(Arrays.equals(c_Node.puz,goal.puz)){
+            res.printSolutionPath(res);
+            System.out.println("Number of states enqueued : "+enque);
 
-
+        }else{
+            System.out.println("Maximum Depth of 10 reached without finding the goal");
+            System.out.println(-1);
+        }
     }
 
     private Node dfs(Node root, int limit){
@@ -76,7 +83,6 @@ public class SearchMethods {
 
 
     public Node aStar1(Node startState){
-        System.out.println("here");
         PriorityQueue<Node> q = new PriorityQueue<Node>(new Comparator<Node>() {
             @Override
             public int compare(Node o1, Node o2) {
@@ -89,7 +95,7 @@ public class SearchMethods {
         temp.f_score =  g + temp.getMisplacedTiles(goal);
         q.offer(temp);
         g++;
-        while(!Arrays.equals(temp.puz,goal.puz)){
+        while(!Arrays.equals(temp.puz,goal.puz) && !q.isEmpty()){
             temp = q.poll();
             set.add(temp);
             ArrayList<Node> children = temp.getChildrenNodes();

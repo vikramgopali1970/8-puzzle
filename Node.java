@@ -90,7 +90,6 @@ public class Node {
     public void printSolutionPath(Node n){
         Stack<Node> s = new Stack<Node>();
         while(n != null){
-//            System.out.println(n);
             s.push(n);
             n = n.parent;
         }
@@ -99,7 +98,7 @@ public class Node {
             System.out.println(s.pop());
             steps++;
         }
-        System.out.println("Number of moves = "+steps);
+        System.out.println("Number of moves = "+(steps-1));
     }
 
     public int getMisplacedTiles(Node goal){
