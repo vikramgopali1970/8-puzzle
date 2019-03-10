@@ -1,6 +1,7 @@
 package AI_Hw;
 
 
+
 import java.util.Scanner;
 
 public class Main {
