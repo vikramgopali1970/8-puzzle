@@ -2,6 +2,12 @@ package AI_Hw;
 
 
 
+import rbk.Graph;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Scanner;
 
 public class Main {
@@ -19,11 +25,11 @@ public class Main {
         System.out.println("Press -1 to exit the 8 - puzzle");
     }
 
-    public static void main(String[] args){
-        char[] puz = new char[9];
+    private static void commandLineTools(){
+        int[] puz = new int[9];
         int b_index = -1;
         Scanner sc = new Scanner(System.in);
-        SearchMethods sm = new SearchMethods();
+        SearchMethods sm = new SearchMethods(null);
         boolean infinite = true;
         while(infinite){
             showIntroMessage();
@@ -31,10 +37,10 @@ public class Main {
             switch (choice){
                 case 1:
                     System.out.println("Please enter the configuration of the puzzle from left to right and from top to bottom.");
-                    System.out.println("input * to represent the blank space.");
+                    System.out.println("input 0 to represent the blank space.");
                     for(int i=0;i<puz.length;i++){
-                        puz[i] = sc.next().charAt(0);
-                        if(puz[i] == '*'){
+                        puz[i] = sc.nextInt();
+                        if(puz[i] == 0){
                             b_index = i;
                         }
                     }
@@ -50,11 +56,11 @@ public class Main {
                     break;
                 case 3:
                     System.out.println("Performing the Iterative Deepening search : ");
-                    sm.idsAlgorithm(new Node(puz,b_index,null));
+//                    sm.idsAlgorithm(new Node(puz,b_index,null));
                     break;
                 case 4:
                     System.out.println("Performing the A* Heuristic search with Number of Miss placed Tiles : ");
-                    sm.aStar1(new Node(puz,b_index,null));
+                    sm.aStar1(new Node(puz,b_index,null),null);
                     break;
                 case 5:
                     System.out.println("Performing the A* Heuristic search with Manhattan Distance of Number of Miss placed Tiles : ");
@@ -68,5 +74,13 @@ public class Main {
                     break;
             }
         }
+    }
+
+
+
+    public static void main(String[] args){
+//        commandLineTools();
+        UIComponent ui = new UIComponent();
+        ui.getInformation();
     }
 }
