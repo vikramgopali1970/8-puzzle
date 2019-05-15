@@ -446,14 +446,14 @@ public class UIComponent implements Runnable{
 
     @Override
     public void run() {
-        System.out.println("hererere");
+//        System.out.println("hererere");
         this.state = this.path.size();
         while(!this.path.isEmpty()){
             Node pop = this.path.pop();
             System.out.println(pop);
             try
             {
-                Thread.sleep(1000);
+                Thread.sleep(1500);
             }
             catch(InterruptedException _ex)
             {
